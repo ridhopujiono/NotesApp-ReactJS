@@ -1,5 +1,7 @@
 import React from 'react'
 import AddEvent from '../components/AddEvent'
+import PropTypes from 'prop-types'
+
 const Create = ({addEventHandler}) => {
   return (
     <div>
@@ -7,5 +9,7 @@ const Create = ({addEventHandler}) => {
     </div>
   )
 }
-
+Create.propTypes = {
+  addEventHandler: PropTypes.any
+}
 export default Create

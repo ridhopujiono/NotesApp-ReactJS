@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 const HeaderEvent = ({darkHandler}) => {
    let toggleFormContainer = false;
@@ -30,5 +31,9 @@ const HeaderEvent = ({darkHandler}) => {
          </div>
       </div>
    );
+}
+
+HeaderEvent.propTypes = {
+   darkHandler: PropTypes.bool
 }
 export default HeaderEvent;

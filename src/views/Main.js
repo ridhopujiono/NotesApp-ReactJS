@@ -1,5 +1,7 @@
 import Event from '../components/Event'
 import SearchEvent from '../components/SearchEvent'; 
+import PropTypes from 'prop-types'
+
 const Main = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
    return (
       <div className="">
@@ -35,5 +37,10 @@ const Main = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
       </div>
    )
 }
-
+Main.propTypes  = {
+   events: PropTypes.object,
+   deleteEventHandler: PropTypes.any,
+   searchEventHandler: PropTypes.any,
+   doArchive: PropTypes.any,
+}
 export default Main;

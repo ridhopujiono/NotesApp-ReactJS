@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import AddEvent from '../components/AddEvent'
+import PropTypes from 'prop-types'
 const Detail = ({detailHandler, doArchive}) => {
   const {eventId} = useParams();
   const data = detailHandler(eventId);
@@ -23,5 +24,8 @@ const Detail = ({detailHandler, doArchive}) => {
     </div>
   )
 }
-
+Detail.propTypes = {
+  detailHandler: PropTypes.any,
+  doArchive: PropTypes.any
+}
 export default Detail

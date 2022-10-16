@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types'
 
 const Event = ({id, title, body, createdAt, archived, deleteEventHandler, doArchive}) => {
       return (
@@ -21,5 +22,13 @@ const Event = ({id, title, body, createdAt, archived, deleteEventHandler, doArch
       </div>
       );
 }
-
+Event.propTypes = {
+   id: PropTypes.string,
+   title: PropTypes.string,
+   body: PropTypes.string,
+   createdAt: PropTypes.string,
+   archived: PropTypes.bool,
+   deleteEventHandler: PropTypes.any,
+   doArchive: PropTypes.any,
+ }
 export default Event;

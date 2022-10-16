@@ -1,4 +1,3 @@
-import ListEvent from "./components/ListEvent";
 import { useState } from "react";
 import { useEffect } from "react";
 import {nanoid} from 'nanoid';
@@ -9,8 +8,12 @@ import Create from './views/Create'
 import Main from './views/Main'
 import Detail from './views/Detail'
 import PageNotFound from './views/PageNotFound'
-import PropTypes from 'prop-types'
+import { useNavigate } from "react-router-dom";
+
+
+
 const App = () => {
+  const navigate = useNavigate();
   const [searchEvent, setSearchEvent] = useState('');
   const [dark, setDark] = useState(false);
 
@@ -86,6 +89,7 @@ const addEventHandler = (title, body) =>{
   };
   const newDatas = [...events, newData];
   setEvents(newDatas);
+  navigate('/');
 }
 const deleteEventHandler = (id) =>{
   const newData = events.filter((event) => 
@@ -103,6 +107,7 @@ const doArchive = (type, id) => {
     getData[getIndex].archived = false; 
   }
   setEvents(getData)
+  navigate('/');
 }
 const detailHandler = (eventId) => {
   let result = events.filter((data) => 
@@ -128,13 +133,12 @@ const detailHandler = (eventId) => {
     
     <div className={`${dark && 'dark'}`}>
       <div className="container">
-        <HeaderEvent darkHandler={0}/>
+        <HeaderEvent darkHandler={setDark}/>
         <Routes>
           <Route path="/" element={<Main events={events.filter((event) => event.title.toLowerCase().includes(searchEvent))} deleteEventHandler={deleteEventHandler} searchEventHandler={setSearchEvent} doArchive={doArchive}/>}>
           </Route>
           
           <Route path="/add" element={<Create addEventHandler={addEventHandler} />} /> 
-          <Route path="/archived" element={<Create addEventHandler={addEventHandler} />} /> 
           <Route path="/detail/:eventId" element={<Detail detailHandler={detailHandler} doArchive={doArchive}/>} /> 
           <Route path="*" element={<PageNotFound />} /> 
         </Routes>
