@@ -108,9 +108,17 @@ body{
   display: flex;
   justify-content: right;
 }
-.btn-arsip, .btn-delete{
+.btn-arsip, .btn-delete, .btn-detail{
   background: transparent;
   padding: 7px 10px;
+}
+.btn-detail{
+  margin-right: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #eee;
+  color: rgb(17, 17, 17);
+  text-decoration: none;
+  font-size: 14px;
 }
 .btn-arsip{
   margin-right: 5px;
@@ -131,6 +139,7 @@ body{
 }
 
 .add-event-container{
+  display: flex;
   padding: 20px;
   justify-content: center;
   border-bottom: 1px solid #eee;
@@ -153,4 +162,23 @@ input[type="text"], textarea{
     width: 100%;
     justify-content: end;
 }
-
+.not-found{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  color: cadetblue;
+}
+.btn-unarchived{
+  margin-right: 5px;
+  border: 1px solid rgb(13, 168, 168);
+  color: rgb(13, 168, 168);
+  padding: 8px;
+}
+.btn-archived{
+  margin-right: 5px;
+  border: 1px solid rgb(233, 162, 30);
+  color: rgb(37, 37, 37);
+  padding: 8px;
+  text-decoration: none;
+}

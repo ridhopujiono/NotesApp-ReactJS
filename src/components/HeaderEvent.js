@@ -1,5 +1,4 @@
-import useState from 'react';
-import {FaPlus} from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 const HeaderEvent = ({darkHandler}) => {
    let toggleFormContainer = false;
@@ -26,8 +25,7 @@ const HeaderEvent = ({darkHandler}) => {
             Catatan Saya
          </div>
          <div>
-            <button className='addEventButton' onClick={toggleForm}>Buat Catatan
-            </button>
+            <NavLink to='/add' className="addEventButton">Tambah  Catatan</NavLink>
             <button onClick={() => darkHandler((prevDark) => !prevDark)} className="toggle-mode">Mode</button>
          </div>
       </div>

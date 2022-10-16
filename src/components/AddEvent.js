@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 const AddEvent = ({addEventHandler}) => {
    const [title, setTitle] = useState('');
    const [body, setBody] = useState('');
@@ -21,7 +22,7 @@ const AddEvent = ({addEventHandler}) => {
    }
 
    return (
-      <div className="add-event-container d-none">
+      <div className="add-event-container">
          <div className="add-event-item">
             <small className="event-helper">Karakter tersisa : {limitTitle - title.length}</small>
             <div className="group-form">

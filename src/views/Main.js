@@ -1,6 +1,6 @@
-import Event from './Event'; 
-import SearchEvent from './SearchEvent'; 
-const ListEvent = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
+import Event from '../components/Event'
+import SearchEvent from '../components/SearchEvent'; 
+const Main = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
    return (
       <div className="">
          <SearchEvent searchEventHandler={searchEventHandler}/>
@@ -28,7 +28,7 @@ const ListEvent = ({events, deleteEventHandler, searchEventHandler, doArchive}) 
                ) : ''  
              ))
             :
-            <div className='alert-warning'> Tidak ada catatan</div>
+            <div className='alert-warning'>Tidak ada catatan</div>
             
          }
          </div>
@@ -36,4 +36,4 @@ const ListEvent = ({events, deleteEventHandler, searchEventHandler, doArchive}) 
    )
 }
 
-export default ListEvent;
+export default Main;
