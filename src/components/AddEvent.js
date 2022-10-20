@@ -38,4 +38,7 @@ const AddEvent = ({addEventHandler}) => {
       </div>
    );
 }
+AddEvent.propTypes = {
+   addEventHandler: PropTypes.any
+}
 export default AddEvent;
