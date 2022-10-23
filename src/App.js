@@ -5,12 +5,12 @@ import AddEvent from "./components/AddEvent";
 import HeaderEvent from "./components/HeaderEvent";
 import {Routes, Route} from "react-router-dom";
 import Create from './views/Create'
+import Login from './views/Login'
+import Register from './views/Register'
 import Main from './views/Main'
 import Detail from './views/Detail'
 import PageNotFound from './views/PageNotFound'
 import { useNavigate } from "react-router-dom";
-
-
 
 const App = () => {
   const navigate = useNavigate();
@@ -133,11 +133,15 @@ const detailHandler = (eventId) => {
     
     <div className={`${dark && 'dark'}`}>
       <div className="container">
-        <HeaderEvent darkHandler={setDark}/>
+      {
+        (window.location.pathname =='/' || window.location.pathname  == '/register') ? null : <HeaderEvent darkHandler={setDark}/>
+      }
+       
         <Routes>
-          <Route path="/" element={<Main events={events.filter((event) => event.title.toLowerCase().includes(searchEvent))} deleteEventHandler={deleteEventHandler} searchEventHandler={setSearchEvent} doArchive={doArchive}/>}>
-          </Route>
-          
+          {/* <Route path="/" element={<Main events={events.filter((event) => event.title.toLowerCase().includes(searchEvent))} deleteEventHandler={deleteEventHandler} searchEventHandler={setSearchEvent} doArchive={doArchive}/>}>
+          </Route> */}
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/add" element={<Create addEventHandler={addEventHandler} />} /> 
           <Route path="/detail/:eventId" element={<Detail detailHandler={detailHandler} doArchive={doArchive}/>} /> 
           <Route path="*" element={<PageNotFound />} /> 
