@@ -1,7 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
 const HeaderEvent = ({darkHandler}) => {
+   let navigate = useNavigate();
+   const logoutHandler = () => {
+      localStorage.removeItem("_token_user_dicoding");
+      localStorage.removeItem("_detail_user_dicoding");
+      navigate('/');
+   }
+
+
    let toggleFormContainer = false;
    const toggleForm = () =>{
       let form = document.querySelector('.add-event-container');
@@ -28,12 +36,13 @@ const HeaderEvent = ({darkHandler}) => {
          <div>
             <NavLink to='/add' className="addEventButton">Tambah  Catatan</NavLink>
             <button onClick={() => darkHandler((prevDark) => !prevDark)} className="toggle-mode">Mode</button>
+            <button onClick={() => logoutHandler()} className="logout">Logout</button>
          </div>
       </div>
    );
 }
 
 HeaderEvent.propTypes = {
-   darkHandler: PropTypes.bool
+   darkHandler: PropTypes.any
 }
 export default HeaderEvent;

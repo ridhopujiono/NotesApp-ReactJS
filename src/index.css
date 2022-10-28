@@ -159,12 +159,6 @@ input[type="text"], textarea{
   padding: 10px;
   border-radius: 7px;
 }
-.event-helper{
-    margin-bottom: 10px;
-    display: flex;
-    width: 100%;
-    justify-content: end;
-}
 .not-found{
   display: flex;
   justify-content: center;
@@ -178,6 +172,13 @@ input[type="text"], textarea{
   color: rgb(13, 168, 168);
   padding: 8px;
 }
+.logout{
+  margin-left: 5px;
+  border: 1px solid rgb(255, 60, 60);
+  color: rgb(230, 40, 40);
+  padding: 8px;
+  background: transparent;
+}
 .btn-archived{
   margin-right: 5px;
   border: 1px solid rgb(233, 162, 30);
@@ -188,7 +189,6 @@ input[type="text"], textarea{
 
 
 /* LOGIN AND REGISTER CSS */
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
   width: 360px;
@@ -278,16 +278,6 @@ input[type="text"], textarea{
 .container .info span .fa {
   color: #EF3B3A;
 } */
-.body-login {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-  background: -moz-linear-gradient(right, #76b852, #8DC26F);
-  background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #76b852, #8DC26F);
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
-}
 
 .alert{
   padding: 15px 11px;

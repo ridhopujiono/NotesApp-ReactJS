@@ -1,24 +1,40 @@
-import React from 'react'
+import {React, useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import AddEvent from '../components/AddEvent'
 import PropTypes from 'prop-types'
-const Detail = ({detailHandler, doArchive}) => {
+import axios from 'axios'
+import EndPoint from "../config/EndPoint";
+
+const Detail = ({doArchive}) => {
+  const bearer_token = `Bearer ${localStorage.getItem('_token_user_dicoding')}`;
   const {eventId} = useParams();
-  const data = detailHandler(eventId);
+  const [data, setData] = useState([])
+  const getData = () => {
+    axios.get(EndPoint.base + `/notes/${eventId}`, {
+      headers: {
+          'Authorization': bearer_token
+      }
+    }).then((res) => {
+        setData(res.data.data)
+    });
+  }
+  useEffect(() => {
+    getData()
+  }, [])
   return (
     <div className='container'>
-        <h2>{data[0].title}</h2>
-        <small>{data[0].createdAt}</small>
+        <h2>{data.title}</h2>
+        <small>{data.createdAt}</small>
         <br></br>
         <br></br>
         <p>
-          {data[0].body}
+          {data.body}
         </p>
         <p>
           Status : 
-          {(data[0].archived == true) ? 'ter-arsip' : 'tidak terarsip'}
+          {(data.archived == true) ? 'ter-arsip' : 'tidak terarsip'}
         </p>
-        {(data[0].archived == true) ? 
+        {(data.archived == true) ? 
         <button className='btn-unarchived' onClick={() => doArchive(false, eventId)}>Batalkan Arsip</button> :  <button className='btn-unarchived' onClick={() => doArchive(true, eventId)}>Arsipkan</button>
         }
     </div>

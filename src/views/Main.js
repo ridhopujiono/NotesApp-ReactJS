@@ -1,8 +1,35 @@
 import Event from '../components/Event'
 import SearchEvent from '../components/SearchEvent'; 
 import PropTypes from 'prop-types'
+import axios from "axios";
+import { useEffect } from 'react';
+
 
 const Main = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
+   const storeUserDetail  = () => {
+      const userURL = 'https://notes-api.dicoding.dev/v1/users/me';
+      const bearer_token = `Bearer ${localStorage.getItem('_token_user_dicoding')}`;
+      axios.get(userURL, {
+          headers: {
+              'Authorization': bearer_token
+          }
+      })
+      .then((res) => {
+          if(res.data.status == 'success'){
+              localStorage.setItem('_detail_user_dicoding', 
+                  JSON.stringify(res.data.data)
+              );
+          }else{
+              alert('Something is wrong.');
+          }
+      })
+      .catch((error) => {
+          console.error(error)
+      })
+   }
+   useEffect(() => {
+      storeUserDetail()
+   }, []);
    return (
       <div className="">
          <SearchEvent searchEventHandler={searchEventHandler}/>
@@ -38,7 +65,7 @@ const Main = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
    )
 }
 Main.propTypes  = {
-   events: PropTypes.object,
+   events: PropTypes.any,
    deleteEventHandler: PropTypes.any,
    searchEventHandler: PropTypes.any,
    doArchive: PropTypes.any,
