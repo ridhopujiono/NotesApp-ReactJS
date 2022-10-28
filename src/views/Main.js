@@ -30,6 +30,10 @@ const Main = ({events, deleteEventHandler, searchEventHandler, doArchive}) => {
    useEffect(() => {
       storeUserDetail()
    }, []);
+
+   if(localStorage.getItem('_token_user_dicoding') == null){
+      window.location.href = '/';
+   }
    return (
       <div className="">
          <SearchEvent searchEventHandler={searchEventHandler}/>

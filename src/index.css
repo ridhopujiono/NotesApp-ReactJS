@@ -92,8 +92,10 @@ body{
   border-radius: 10px;
   min-height: 180px;
   white-space: pre-wrap;
+  color: black !important;
 }
 .event-title{
+  color: black !important;
   font-size: 16px;
   font-weight: bold;
   display: inline-block;

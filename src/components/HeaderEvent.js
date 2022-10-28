@@ -35,7 +35,7 @@ const HeaderEvent = ({darkHandler}) => {
          </div>
          <div>
             <NavLink to='/add' className="addEventButton">Tambah  Catatan</NavLink>
-            <button onClick={() => darkHandler((prevDark) => !prevDark)} className="toggle-mode">Mode</button>
+            <button onClick={() => darkHandler()} className="toggle-mode">Mode</button>
             <button onClick={() => logoutHandler()} className="logout">Logout</button>
          </div>
       </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { useContext } from "react";
 import {nanoid} from 'nanoid';
 import AddEvent from "./components/AddEvent";
 import HeaderEvent from "./components/HeaderEvent";
@@ -13,8 +14,11 @@ import PageNotFound from './views/PageNotFound'
 import { useNavigate } from "react-router-dom";
 import EndPoint from "./config/EndPoint";
 import axios from "axios";
+import Container from './components/Container'
+import ThemeContext, {themes} from "./config/ThemeContext";
 
 const App = () => {
+
   const navigate = useNavigate();
   const [searchEvent, setSearchEvent] = useState('');
   const [dark, setDark] = useState(false);
@@ -101,15 +105,6 @@ const addEventHandler = (title, body) =>{
       console.log(error)
         if(error.code == 'ERR_BAD_REQUEST'){
           alert("BAD REQUEST")
-          // let alert = document.querySelector('.alert');
-          // let message = error.response.data.message;
-
-          // if(alert.classList.contains('d-none')){
-          //     alert.innerHTML = message;
-          //     alert.classList.remove('d-none')
-          // }else{
-          //     alert.classList.add('d-none')
-          // }
       }
   });
 
@@ -169,43 +164,45 @@ const doArchive = (type, id) => {
   setEvents(getData)
   navigate('/notes');
 }
-
-
-// const detailHandler =  (eventId) => {
-//     return axios.get(EndPoint.base + `/notes/${eventId}`, {
-//       headers: {
-//           'Authorization': bearer_token
-//       }
-//     }).then(response => response.data.data)
-// }
-
 useEffect(()=>{
   getAPIResult()
 }, []);
 
+// 
+  // THEME
+  const theme_ = useContext(ThemeContext);
+  const [theme, setTheme] = useState(theme_);
+
+  const darkHandler = () => theme === themes.light ? setTheme(themes.dark) : setTheme(themes.light)
+// 
+
 
   return (
     
-    <div className={`${dark && 'dark'}`}>
-      <div className="container">
-      {
-        (window.location.pathname =='/' || window.location.pathname  == '/register') ? null : <HeaderEvent darkHandler={setDark}/>
-      }
-       
-        <Routes>
+    // <div className={`${dark && 'dark'}`}>
+    <ThemeContext.Provider value={theme} >
+      {/* <Container /> */}
+      <div style={theme}>
+        <div className="container">
+        {
+          (window.location.pathname =='/' || window.location.pathname  == '/register') ? null : <HeaderEvent darkHandler={darkHandler}/>
+        }
+        
+          <Routes>
 
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          <Route path="/notes" element={<Main events={(events.length > 0) ? events.filter((event) => event.title.toLowerCase().includes(searchEvent)) : []} deleteEventHandler={deleteEventHandler} searchEventHandler={setSearchEvent} doArchive={doArchive}/>}>
-          </Route>
-          
-          <Route path="/add" element={<Create addEventHandler={addEventHandler} />} /> 
-          <Route path="/notes/detail/:eventId" element={<Detail doArchive={doArchive}/>} /> 
-          <Route path="*" element={<PageNotFound />} /> 
-        </Routes>
+            <Route path="/notes" element={<Main events={(events.length > 0) ? events.filter((event) => event.title.toLowerCase().includes(searchEvent)) : []} deleteEventHandler={deleteEventHandler} searchEventHandler={setSearchEvent} doArchive={doArchive}/>}>
+            </Route>
+            
+            <Route path="/add" element={<Create addEventHandler={addEventHandler} />} /> 
+            <Route path="/notes/detail/:eventId" element={<Detail doArchive={doArchive}/>} /> 
+            <Route path="*" element={<PageNotFound />} /> 
+          </Routes>
+        </div>
       </div>
-    </div>
+    </ThemeContext.Provider>
   );
 }
 

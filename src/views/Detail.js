@@ -6,6 +6,11 @@ import axios from 'axios'
 import EndPoint from "../config/EndPoint";
 
 const Detail = ({doArchive}) => {
+
+  if(localStorage.getItem('_token_user_dicoding') == null){
+    window.location.href = '/';
+  }
+
   const bearer_token = `Bearer ${localStorage.getItem('_token_user_dicoding')}`;
   const {eventId} = useParams();
   const [data, setData] = useState([])
