@@ -10,8 +10,12 @@ export const themes = {
       background: 'white'
    }
 };
-
-
-const ThemeContext = React.createContext(themes.light);
+let ThemeContext = null;
+if(localStorage.getItem('get-theme') == null)
+{
+   ThemeContext = React.createContext(themes.light);
+}else{
+   ThemeContext = React.createContext(JSON.parse(localStorage.getItem('get-theme')));
+}
 
 export default ThemeContext;

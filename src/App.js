@@ -168,12 +168,25 @@ useEffect(()=>{
   getAPIResult()
 }, []);
 
+function storeTheme(data){
+  localStorage.setItem('get-theme', JSON.stringify(data));
+}
+
 // 
   // THEME
   const theme_ = useContext(ThemeContext);
   const [theme, setTheme] = useState(theme_);
 
-  const darkHandler = () => theme === themes.light ? setTheme(themes.dark) : setTheme(themes.light)
+  const darkHandler = () => {
+    if(theme === themes.light){
+      setTheme(themes.dark); 
+      storeTheme(themes.dark)  
+    } else{
+      setTheme(themes.light); 
+      storeTheme(themes.light)
+    }
+  }
+
 // 
 
 
